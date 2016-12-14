@@ -10,7 +10,10 @@ Pod::Spec.new do |s|
 
   s.ios.resource_bundle = { s.name => ['INSPhotoGallery/INSPhotoGallery.bundle/*'] }
   s.source_files = 'INSPhotoGallery/**/*.{h,m,swift}'
-  
+
   s.platform = :ios, '8.0'
   s.frameworks = 'UIKit', 'Foundation'
+
+  s.dependency 'FLAnimatedImage', '~> 1.0'
+  s.dependency 'SDWebImage', '~>3.8'
 end

@@ -18,6 +18,7 @@
 //  limitations under the License.
 
 import UIKit
+import SDWebImage
 
 open class INSPhotoViewController: UIViewController, UIScrollViewDelegate {
     var photo: INSPhotoViewable
@@ -74,7 +75,11 @@ open class INSPhotoViewController: UIViewController, UIScrollViewDelegate {
         view.addGestureRecognizer(doubleTapGestureRecognizer)
         view.addGestureRecognizer(longPressGestureRecognizer)
         
-        if let image = photo.image {
+        
+        if let imageURL = photo.imageURL{
+            self.scalingImageView.imageURL = imageURL
+            self.activityIndicator.stopAnimating()
+        }else if let image = photo.image {
             self.scalingImageView.image = image
             self.activityIndicator.stopAnimating()
         } else if let thumbnailImage = photo.thumbnailImage {

@@ -18,6 +18,8 @@
 //  limitations under the License.
 
 import UIKit
+import FLAnimatedImage
+import SDWebImage
 private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -31,8 +33,8 @@ private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 
 class INSScalingImageView: UIScrollView {
-    lazy var imageView: UIImageView = {
-        let imageView = UIImageView(frame: self.bounds)
+    lazy var imageView: FLAnimatedImageView = {
+        let imageView = FLAnimatedImageView(frame: self.bounds)
         self.addSubview(imageView)
         return imageView
     }()
@@ -40,6 +42,12 @@ class INSScalingImageView: UIScrollView {
     var image: UIImage? {
         didSet {
             updateImage(image)
+        }
+    }
+    
+    var imageURL: URL? {
+        didSet {
+            updateImage(imageURL)
         }
     }
     
@@ -100,6 +108,19 @@ class INSScalingImageView: UIScrollView {
         
         imageView.transform = CGAffineTransform.identity
         imageView.image = image
+        imageView.frame = CGRect(origin: CGPoint.zero, size: size)
+        self.contentSize = size
+        
+        updateZoomScale()
+        centerScrollViewContents()
+    }
+    
+    private func updateImage(_ imageURL: URL?) {
+        
+        imageView.sd_setImage(with: imageURL)
+        let size = imageView.image?.size ?? CGSize.zero
+        
+        imageView.transform = CGAffineTransform.identity
         imageView.frame = CGRect(origin: CGPoint.zero, size: size)
         self.contentSize = size
         
