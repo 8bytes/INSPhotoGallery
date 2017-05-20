@@ -19,6 +19,7 @@
 
 import UIKit
 import SDWebImage
+import AlamofireImage
 
 open class INSPhotoViewController: UIViewController, UIScrollViewDelegate {
     var photo: INSPhotoViewable
@@ -121,20 +122,23 @@ open class INSPhotoViewController: UIViewController, UIScrollViewDelegate {
     
     private func loadFullSizeImage() {
         view.bringSubview(toFront: activityIndicator)
-        self.photo.loadImageWithCompletionHandler({ [weak self] (image, error) -> () in
-            let completeLoading = {
-                self?.activityIndicator.stopAnimating()
-                self?.scalingImageView.image = image    
-            }
+        if let imageURLRequest = photo.imageURLRequest {
+            self.scalingImageView.imageView.af_setImage(withURLRequest: imageURLRequest)
+        }
+        //self.photo.loadImageWithCompletionHandler({ [weak self] (image, error) -> () in
+          //  let completeLoading = {
+            //    self?.activityIndicator.stopAnimating()
+              //  self?.scalingImageView.image = image
+            //}
             
-            if Thread.isMainThread {
-                completeLoading()
-            } else {
-                DispatchQueue.main.async(execute: { () -> Void in
-                    completeLoading()
-                })
-            }
-        })
+           // if Thread.isMainThread {
+           //     completeLoading()
+           // } else {
+            //    DispatchQueue.main.async(execute: { () -> Void in
+            //        completeLoading()
+            //    })
+           // }
+       // })
     }
     
     @objc private func handleLongPressWithGestureRecognizer(_ recognizer: UILongPressGestureRecognizer) {

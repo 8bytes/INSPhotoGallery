@@ -26,6 +26,7 @@ import UIKit
 @objc public protocol INSPhotoViewable: class {
     var image: UIImage? { get }
     var imageURL: URL? { get }
+    var imageURLRequest: URLRequest? { get }
     var thumbnailImage: UIImage? { get }
 
     func loadImageWithCompletionHandler(_ completion: @escaping (_ image: UIImage?, _ error: Error?) -> ())
@@ -39,13 +40,21 @@ open class INSPhoto: INSPhotoViewable, Equatable {
     @objc open var thumbnailImage: UIImage?
     
     @objc open var imageURL: URL?
+    @objc open var imageURLRequest: URLRequest?
     var thumbnailImageURL: URL?
+    open var postId: Int = -1
     
     @objc open var attributedTitle: NSAttributedString?
     
     public init(image: UIImage?, thumbnailImage: UIImage?) {
         self.image = image
         self.thumbnailImage = thumbnailImage
+    }
+    
+    public init(imageURLRequest: URLRequest?, thumbnailImage: UIImage?, postId: Int) {
+        self.imageURLRequest = imageURLRequest
+        self.thumbnailImage = thumbnailImage
+        self.postId = postId
     }
     
     public init(imageURL: URL?, thumbnailImageURL: URL?) {

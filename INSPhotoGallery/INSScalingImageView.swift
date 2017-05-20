@@ -33,8 +33,8 @@ private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 
 class INSScalingImageView: UIScrollView {
-    lazy var imageView: FLAnimatedImageView = {
-        let imageView = FLAnimatedImageView(frame: self.bounds)
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView(frame: self.bounds)
         self.addSubview(imageView)
         return imageView
     }()

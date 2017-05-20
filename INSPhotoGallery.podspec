@@ -16,4 +16,5 @@ Pod::Spec.new do |s|
 
   s.dependency 'FLAnimatedImage', '~> 1.0'
   s.dependency 'SDWebImage', '~>4.0'
+  s.dependency 'AlamofireImage', '~> 3.1'
 end
