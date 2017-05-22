@@ -123,7 +123,11 @@ open class INSPhotoViewController: UIViewController, UIScrollViewDelegate {
     private func loadFullSizeImage() {
         view.bringSubview(toFront: activityIndicator)
         if let imageURLRequest = photo.imageURLRequest {
-            self.scalingImageView.imageView.af_setImage(withURLRequest: imageURLRequest)
+            self.scalingImageView.imageView.af_setImage(withURLRequest: imageURLRequest, completion: { [weak self] (response) in
+                if case .success(let image) = response.result{
+                    self?.scalingImageView.image = image
+                }
+            })
         }
         //self.photo.loadImageWithCompletionHandler({ [weak self] (image, error) -> () in
           //  let completeLoading = {
