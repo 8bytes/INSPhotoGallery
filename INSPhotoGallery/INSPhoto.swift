@@ -35,7 +35,7 @@ import UIKit
     var attributedTitle: NSAttributedString? { get }
 }
 
-open class INSPhoto: INSPhotoViewable, Equatable {
+@objc open class INSPhoto: NSObject, INSPhotoViewable {
     @objc open var image: UIImage?
     @objc open var thumbnailImage: UIImage?
     
@@ -62,7 +62,7 @@ open class INSPhoto: INSPhotoViewable, Equatable {
         self.thumbnailImageURL = thumbnailImageURL
     }
     
-    public init (imageURL: URL?, thumbnailImage: UIImage) {
+    public init (imageURL: URL?, thumbnailImage: UIImage?) {
         self.imageURL = imageURL
         self.thumbnailImage = thumbnailImage
     }
