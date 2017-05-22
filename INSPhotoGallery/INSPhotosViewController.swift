@@ -127,9 +127,12 @@ open class INSPhotosViewController: UIViewController, UIPageViewControllerDataSo
      
      - returns: A fully initialized object.
      */
-    public init(photos: [INSPhotoViewable], initialPhoto: INSPhotoViewable? = nil, referenceView: UIView? = nil) {
+    public init(photos: [INSPhotoViewable], initialPhoto: INSPhotoViewable? = nil, referenceView: UIView? = nil, overlayView: INSPhotosOverlayViewable? = nil) {
         dataSource = INSPhotosDataSource(photos: photos)
         super.init(nibName: nil, bundle: nil)
+        if let overlayView = overlayView{
+            self.overlayView = overlayView
+        }
         initialSetupWithInitialPhoto(initialPhoto)
         transitionAnimator.startingView = referenceView
         transitionAnimator.endingView = currentPhotoViewController?.scalingImageView.imageView
