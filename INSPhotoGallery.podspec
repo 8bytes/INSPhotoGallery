@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
   s.platform = :ios, '8.0'
   s.frameworks = 'UIKit', 'Foundation'
 
-  s.dependency 'FLAnimatedImage', '~> 1.0'
-  s.dependency 'SDWebImage', '4.0.0'
+  s.dependency 'FLAnimatedImage'
+  s.dependency 'SDWebImage'
 end
